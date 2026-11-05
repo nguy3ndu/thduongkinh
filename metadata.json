@@ -1,0 +1,6 @@
+{
+  "name": "Dương Kinh EdGames - Sáng Tạo & Chơi Game Học Tập Tiểu Học",
+  "description": "Nền tảng tạo và chơi trò chơi giáo dục tương tác cho học sinh và giáo viên Tiểu học Dương Kinh, hỗ trợ tùy biến tỉ lệ ảnh 16:9 chuẩn, quản trị nội dung linh hoạt.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

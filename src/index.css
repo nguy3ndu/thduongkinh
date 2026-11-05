@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    background-color: #f8fafc;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Quicksand', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+/* Custom scrollbars for clean educational dashboard */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.matching-drag-preview {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  border: 4px solid #ffffff;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.28);
+}
+
+.matching-drag-preview img {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+}
+
+.matching-left-piece {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  border: 4px solid rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.24);
+  padding: 8px;
+}
+
+.matching-landed .matching-left-piece {
+  animation: matching-land 650ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+@keyframes matching-land {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.82);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-shake {
+  animation: matching-wrong 520ms ease-in-out;
+}
+
+@keyframes matching-wrong {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-9px); }
+  40%, 80% { transform: translateX(9px); }
+}
