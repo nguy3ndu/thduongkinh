@@ -12,10 +12,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/thduongkinh/assets/index-DTS3oE3H.js"></script>
+    <script type="module" crossorigin src="/thduongkinh/assets/index-CSCt3Fzm.js"></script>
     <link rel="stylesheet" crossorigin href="/thduongkinh/assets/index-DY8o-Xqd.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function restoreGitHubPagesRoute() {
+        var redirect = sessionStorage.getRedirect;
+        delete sessionStorage.getRedirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+          return;
+        }
+
+        if (location.search[1] === '/') {
+          var decoded = location.search.slice(1).split('&').map(function (part) {
+            return part.replace(/~and~/g, '&');
+          });
+          var route = decoded[0];
+          var base = '/thduongkinh/';
+          history.replaceState(null, null, base + route + location.hash);
+        }
+      })();
+    </script>
   </body>
 </html>
