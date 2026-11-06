@@ -1,7 +1,7 @@
 import { Game } from '../types/game';
 import { DEFAULT_GAMES } from '../data/defaultGames';
 
-const STORAGE_KEY = 'hoanghia_edgames_library_v1';
+const STORAGE_KEY = 'hoanghia_edgames_library_v2_fixed_game';
 
 export const storage = {
   // Get all games from localStorage or initialize with defaults
@@ -85,21 +85,32 @@ export const storage = {
     downloadAnchor.remove();
   },
 
+  exportGame(game: Game): Blob {
+    return new Blob([JSON.stringify([game], null, 2)], {
+      type: 'application/json;charset=utf-8',
+    });
+  },
+
   // Import games from parsed JSON object or array
   importDatabase(jsonData: string): { success: boolean; count: number; error?: string } {
     try {
       const parsed = JSON.parse(jsonData);
-      if (!Array.isArray(parsed)) {
+      const inputGames = Array.isArray(parsed) ? parsed : [parsed];
+      if (!Array.isArray(inputGames)) {
         return { success: false, count: 0, error: 'Tệp JSON không hợp lệ: Dữ liệu phải là một danh sách trò chơi.' };
       }
 
       // Basic validation
-      const validGames: Game[] = parsed.filter((g) => g && typeof g.id === 'string' && typeof g.title === 'string');
+      const validGames: Game[] = inputGames.filter((g) => g && typeof g.id === 'string' && typeof g.title === 'string');
       if (validGames.length === 0) {
         return { success: false, count: 0, error: 'Không tìm thấy trò chơi hợp lệ trong tệp.' };
       }
 
-      this.saveGames(validGames);
+      const currentGames = this.getGames();
+      const mergedGames = [...validGames, ...currentGames.filter(
+        (current) => !validGames.some((incoming) => incoming.id === current.id)
+      )];
+      this.saveGames(mergedGames);
       return { success: true, count: validGames.length };
     } catch (err) {
       return { success: false, count: 0, error: 'Lỗi đọc tệp JSON: ' + (err instanceof Error ? err.message : String(err)) };
